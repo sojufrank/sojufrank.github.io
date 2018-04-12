@@ -1,0 +1,35 @@
+.page {
+  max-width: 960px;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+}
+
+body, html {
+  height: 100%;
+}
+
+.landing-container {
+  display: flex;
+  justify-content: center;
+  /* align horizontal */
+  align-items: center;
+  /* align vertical */
+}
+
+.bg {
+  /* The image used */
+  /* Full height */
+  height: 94%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: linear-gradient( rgba(0, 0, 0, .6), rgba(255, 255, 255, 0.1)), url("seattle.jpg");
+}
+
+.navbar {
+  height: 6%;
+}

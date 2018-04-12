@@ -1,0 +1,40 @@
+body {
+  width: 100%;
+  max-width: 960px;
+  margin: 0px auto;
+  background: white;
+}
+
+.jumbotron {
+  margin-bottom: 0px;
+  background: #CFD8DC;
+}
+
+.content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #e9ecef;
+  padding-left: 10px;
+  margin-bottom: 0px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.navbar-brand {
+  font-size: 2em;
+}
+
+.footer {
+  margin-top: 0px;
+  color: white;
+}
+
+.btn {
+  color: white !important;
+}

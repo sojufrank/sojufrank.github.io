@@ -18,7 +18,7 @@ function initMap() {
 
   data.forEach(item => {
     const myLatLng = mapModule.getCoords(item.latitude, item.longitude, item.location);
-    const marker = mapModule.makeMarker(map, myLatLng);
+    const marker = mapModule.makeMarker(map, myLatLng, item.summarized_offense_description);
     const content = mapModule.makeContent(item);
 
     //unable to put add listener method to map module due to error with popup window
@@ -67,10 +67,11 @@ let mapModule = {
       coords = new google.maps.LatLng(location.latitude, location.longitude);
     return coords;
   },
-  makeMarker: (m, c) => {
+  makeMarker: (m, c, item) => {
     return new google.maps.Marker({
       position: c,
       map: m,
+      icon: iconSwitch(item)
     });
   },
   makeContent: (data) => {
@@ -137,3 +138,150 @@ let view = {
 }
 
 controller.init();
+
+function iconSwitch(description){
+  let icon;
+  switch (description) {
+    //person icons
+    case "ASSAULT":
+      icon = "images/person/Assault.png";
+      break;
+    case "WEAPON":
+      icon = "images/person/DriveBy.png";
+      break;
+    case "DISPUTE":
+      icon = "images/person/DriveBy.png";
+      break;
+    case "HOMICIDE":
+      icon = "images/person/Homicide.png";
+      break;
+    case "ROBBERY":
+      icon = "images/person/Robbery.png";
+      break;
+    case "THREATS":
+      icon = "images/person/Threats.png";
+      break;
+
+      //drugs and vice icons
+    case "LIQUOR VIOLATION":
+      icon = "images/drugsAndVice/Liquor Violation.png";
+      break;
+    case "NARCOTICS":
+      icon = "images/drugsAndVice/Narcotics.png";
+      break;
+    case "OTHER VICE":
+      icon = "images/drugsAndVice/Other Vice.png";
+      break;
+    case "PROSTITUTION":
+      icon = "images/drugsAndVice/Prostitution.png";
+      break;
+    case "OBSTRUCT":
+      icon = "images/drugsAndVice/Stay Out of Area of Drugs.png";
+      break;
+    case "STAY OUT OF AREA OF PROSTITUTION":
+      icon = "images/drugsAndVice/Stay Out of Area of Prostitution.png";
+      break;
+
+      //property theft and crime
+    case "BIKE THEFT":
+      icon = "images/propertyTheftAndCrime/Bike Theft.png";
+      break;
+    case "THEFT OF SERVICES":
+      icon = "images/propertyTheftAndCrime/Other Property.png";
+      break;
+    case "STOLEN PROPERTY":
+      icon = "images/propertyTheftAndCrime/Pickpocket.png";
+      break;
+    case "LOST PROPERTY":
+      icon = "images/propertyTheftAndCrime/Fraud and Financial.png";
+      break;
+    case "EMBEZZLE":
+      icon = "images/propertyTheftAndCrime/Fraud and Financial.png";
+      break;
+    case "EXTORTION":
+      icon = "images/propertyTheftAndCrime/Fraud and Financial.png";
+      break;
+    case "BURGLARY":
+      icon = "images/propertyTheftAndCrime/Burglary.png";
+      break;
+    case "CAR PROWL":
+      icon = "images/propertyTheftAndCrime/Car Prowl.png";
+      break;
+    case "FRAUD":
+      icon = "images/propertyTheftAndCrime/Fraud and Financial.png";
+      break;
+    case "COUNTERFEIT":
+      icon = "images/propertyTheftAndCrime/Other Property.png";
+      break;
+    case "MAIL THEFT":
+      icon = "images/propertyTheftAndCrime/Mail Theft.png";
+      break;
+    case "OTHER PROPERTY":
+      icon = "images/propertyTheftAndCrime/Other Property.png";
+      break;
+    case "PROPERTY DAMAGE":
+      icon = "images/propertyTheftAndCrime/Property Damage.png";
+      break;
+    case "PICKPOCKET":
+      icon = "images/propertyTheftAndCrime/Pickpocket.png";
+      break;
+    case "SHOPLIFTING":
+      icon = "images/propertyTheftAndCrime/Shoplifting.png";
+      break;
+    case "VEHICLE THEFT":
+      icon = "images/propertyTheftAndCrime/Vehicle Theft.png";
+      break;
+
+      //transportation icons
+    case "DUI":
+      icon = "images/transportation/DUI.png";
+      break;
+    case "HARBOR":
+      icon = "images/transportation/Harbor.png";
+      break;
+    case "METRO":
+      icon = "images/transportation/Metro.png";
+      break;
+    case "TRAFFIC":
+      icon = "images/transportation/Traffic.png";
+      break;
+
+      //misc icons
+    case "ANIMAL COMPLAINT":
+      icon = "images/misc/Animal Complaint.png";
+      break;
+    case "VIOLATION OF COURT ORDER":
+      icon = "images/misc/Disorderly Conduct.png";
+      break;
+    case "WARRANT ARREST":
+      icon = "images/misc/Arrest.png";
+      break;
+    case "DISORDERLY CONDUCT":
+      icon = "images/misc/Disorderly Conduct.png";
+      break;
+    case "DISTURBANCE":
+      icon = "images/misc/Disturbance.png";
+      break;
+    case "FALSE ALARM":
+      icon = "images/misc/False Alarm.png";
+      break;
+    case "FALSE REPORT":
+      icon = "images/misc/False Alarm.png";
+      break;
+    case "ILLEGAL DUMPING":
+      icon = "images/misc/Illegal Dumping.png";
+      break;
+    case "INJURY":
+      icon = "images/misc/Injury.png";
+      break;
+    case "TRESPASS":
+      icon = "images/misc/Trespass.png";
+      break;
+    case "BURGLARY-SECURE PARKING-RES":
+      icon = "images/misc/Unsafe Conditions.png";
+      break;
+    default:
+      icon = "images/drugsAndVice/Other Vice.png"
+  }
+  return icon;
+}

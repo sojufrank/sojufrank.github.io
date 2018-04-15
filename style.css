@@ -22,12 +22,11 @@ body {
 .site-wrap {
   background: white;
   text-align: justify;
-  transition: transform 0.5s;
-  border: 1px solid black;
+  padding-bottom: 30px;
 }
 
 .spacer {
-  margin: 100px;
+  margin: 80px;
 }
 
 a.anchor {
@@ -37,16 +36,25 @@ a.anchor {
   visibility: hidden;
 }
 
-.about-wrapper {
-  border: 1px solid black;
-  max-width: 700px;
-  margin: auto;
+a.anchor2 {
+  display: block;
+  position: relative;
+  top: -30px;
+  visibility: hidden;
 }
 
+.about-wrapper {}
+
 .about-text {
-  border: 1px solid black;
-  max-width: 500px;
+  max-width: 400px;
   margin: auto;
+  font-size: 15px;
+}
+
+.projects {
+  margin-top: 50px;
+  padding-top: 50px;
+  background: #E0E0E0;
 }
 
 #projects {
@@ -93,11 +101,6 @@ a.anchor {
 
 .landing-title {
   font-size: 1.8em;
-}
-
-.test {
-  padding-top: 120px;
-  background: #e9ecef;
 }
 
 nav {

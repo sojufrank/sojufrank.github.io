@@ -106,7 +106,7 @@ a.anchor2 {
 .projects {
   margin-top: 25px;
   padding-top: 25px;
-  background: #E0E0E0;
+  background: white;
   padding-left: 1em;
   padding-right: 1em;
 }
@@ -124,28 +124,97 @@ a.anchor2 {
 
 .card {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  background: black;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 1.25em;
+  bottom: 1.25em;
+  left: 1.25em;
+  right: 1.25em;
+  transform: scale(0, 1);
+  transition: transform ease-out 250ms;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 1.25em;
+  bottom: 1.25em;
+  left: 1.25em;
+  right: 1.25em;
+  transform: scale(1, 0);
+  transition: transform ease-out 250ms;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.card:hover::before {
+  transform: scale(1.03, 1);
+}
+
+.card:hover::after {
+  transform: scale(1, 1.04);
 }
 
 .card img {
   max-width: 100%;
+  vertical-align: bottom;
+  opacity: 1;
+  transition: opacity ease-out 250ms;
 }
 
-.card a {
-  border: 1px solid black;
+.card:hover .card-img {
+  opacity: 0.4;
+}
+
+.card-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  opacity: 0;
+  transition: opacity ease-out 250ms;
+}
+
+.card:hover .card-text {
+  opacity: 1;
+}
+
+.card-title {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+/*
+#cars, #police, #calculator, #simon ::before {
+  display: block;
+  background: #eee;
+  text-align: center;
 }
 
 #cars ::before {
   content: 'Seattle Cars Auction';
-  display: block;
-  display: flex;
-  justify-content: center;
 }
+
+#police ::before {
+  content: 'Seattle Police Reports Map';
+}
+
+#calculator ::before {
+  content: 'Javascript Calculator';
+}
+
+#simon ::before {
+  content: 'Simon Says game';
+}
+*/
 
 #particles-js {
   background-color: rgb(35, 39, 65);
@@ -182,16 +251,6 @@ a.anchor2 {
 
 .landing-title {
   font-size: 3em;
-}
-
-@media screen and (max-width: 450px) {
-  .topnav a:not(:first-child) {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
 }
 
 @media screen and (max-width: 600px) {

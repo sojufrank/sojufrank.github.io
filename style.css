@@ -2,105 +2,11 @@ body, html {
   height: 100%;
   scroll-behavior: smooth;
   font-family: 'Roboto', sans-serif;
-}
-
-html {
-  box-sizing: border-box;
-  font-family: 'helvetica neue';
-  font-size: 20px;
-  font-weight: 200;
-}
-
-body {
   margin: 0;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-.site-wrap {
-  background: white;
-  text-align: justify;
-  padding-bottom: 30px;
-}
-
-.spacer {
-  margin: 80px;
-}
-
-a.anchor {
-  display: block;
-  position: relative;
-  top: -150px;
-  visibility: hidden;
-}
-
-a.anchor2 {
-  display: block;
-  position: relative;
-  top: -30px;
-  visibility: hidden;
-}
-
-.about-wrapper {}
-
-.about-text {
-  max-width: 400px;
-  margin: auto;
-  font-size: 15px;
-}
-
-.projects {
-  margin-top: 50px;
-  padding-top: 50px;
-  background: #E0E0E0;
-}
-
-#projects {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-#particles-js {
-  background-color: rgb(35, 39, 65);
-  height: 100%;
-}
-
 .bg {
-  height: 88%;
-}
-
-.circle {
-  top: 45%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  margin: 1em auto;
-  border: 5px solid #673AB7;
-  border-radius: 50%;
-  background: #03A9F4;
-  color: #F5F5F5;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.circle-content {
-  position: absolute;
-  top: 25%;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-
-.landing-name {
-  font-size: 2.5em;
-}
-
-.landing-title {
-  font-size: 1.8em;
+  height: 94%;
 }
 
 nav {
@@ -123,6 +29,7 @@ nav ul {
   padding: 0;
   list-style: none;
   display: flex;
+  font-size: 2em;
 }
 
 nav li {
@@ -154,11 +61,127 @@ li.logo a {
 
 nav a {
   text-decoration: none;
-  padding: 20px;
+  padding: 10px;
   display: inline-block;
   color: white;
   transition: all 0.2s;
   text-transform: uppercase;
+}
+
+.site-wrap {
+  background: white;
+  text-align: justify;
+  padding-bottom: 30px;
+}
+
+.spacer {
+  margin: 40px;
+}
+
+a.anchor {
+  display: block;
+  position: relative;
+  top: -80px;
+  visibility: hidden;
+}
+
+a.anchor2 {
+  display: block;
+  position: relative;
+  top: -20px;
+  visibility: hidden;
+}
+
+.about-wrapper {
+  margin-top: 25px;
+  padding-top: 25px;
+}
+
+.about-text {
+  max-width: 400px;
+  margin: auto;
+  font-size: 1em;
+}
+
+.projects {
+  margin-top: 25px;
+  padding-top: 25px;
+  background: #E0E0E0;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+#projects {
+  align-items: stretch;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+
+.projects-header {
+  text-align: center;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card img {
+  max-width: 100%;
+}
+
+.card a {
+  border: 1px solid black;
+}
+
+#cars ::before {
+  content: 'Seattle Cars Auction';
+  display: block;
+  display: flex;
+  justify-content: center;
+}
+
+#particles-js {
+  background-color: rgb(35, 39, 65);
+  height: 100%;
+}
+
+.circle {
+  top: 45%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  margin: 1em auto;
+  border: 5px solid #673AB7;
+  border-radius: 50%;
+  background: #03A9F4;
+  color: #F5F5F5;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.circle-content {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.landing-name {
+  font-size: 5em;
+}
+
+.landing-title {
+  font-size: 3em;
 }
 
 @media screen and (max-width: 450px) {
@@ -171,20 +194,40 @@ nav a {
   }
 }
 
-@media screen and (max-width: 450px) {
-  .topnav.responsive {
-    position: relative;
+@media screen and (max-width: 600px) {
+  .circle {
+    width: 300px;
+    height: 300px;
   }
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
+  .landing-name {
+    font-size: 3.5em;
   }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
+  .landing-title {
+    font-size: 2.0em;
+  }
+  nav ul {
+    font-size: 1em;
+  }
+  #projects {
+    grid-template-columns: 1fr;
   }
 }
 
-​
+@media screen and (max-width: 420px) {
+  .circle {
+    width: 250px;
+    height: 250px;
+  }
+  .landing-name {
+    font-size: 3.0em;
+  }
+  .landing-title {
+    font-size: 1.5em;
+  }
+  nav ul {
+    font-size: 1em;
+  }
+  .about-text {
+    width: 80%;
+  }
+}

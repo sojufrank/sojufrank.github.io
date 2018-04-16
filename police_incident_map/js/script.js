@@ -25,10 +25,13 @@ function initMap() {
     marker.addListener('click', (e) => {
 
       const contentParent = document.querySelector('.content-parent');
+      const removalNode = document.querySelectorAll('.popup-tip-anchor');
 
+      //try to find parent element and remove node that contains popupwindow arrow
       try {
-        const removalNode = document.querySelector('.popup-tip-anchor');
-        contentParent.removeChild(removalNode);
+        removalNode.forEach(item => {
+          item.parentElement.removeChild(item);
+        })
       } catch (error) {}
 
       let node = document.createElement('div');
@@ -46,6 +49,8 @@ function initMap() {
 }
 
 let mapModule = {
+
+  // creates map and sets origin coordinates to Seattle
   makeMap: () => {
     const map = document.querySelector('#map');
     const seattle = {
@@ -60,6 +65,8 @@ let mapModule = {
       mapTypeControl: false
     });
   },
+
+  //returns a google coordinate object
   getCoords: (latitude, longitude, location) => {
     let coords = {};
     (latitude && longitude) ?
@@ -67,6 +74,8 @@ let mapModule = {
       coords = new google.maps.LatLng(location.latitude, location.longitude);
     return coords;
   },
+
+  //returns a google map marker object with coordinates and icon
   makeMarker: (m, c, item) => {
     return new google.maps.Marker({
       position: c,
@@ -74,8 +83,16 @@ let mapModule = {
       icon: iconSwitch(item)
     });
   },
+
+  //returns content to put into popup window
   makeContent: (data) => {
-    return data.offense_type;
+    //return data.offense_type;
+
+    return `
+      <h2 class="title">${data.summarized_offense_description}</h2>
+      <p><label>Date: </label> ${data.date}</p>
+      <p><label>Address: </label> ${data.hundred_block_location}</p>
+    `
   }
 }
 
@@ -105,12 +122,20 @@ let controller = {
       .then(res => res.json())
       .catch(err => console.log(err))
       .then(data => {
-        model.reports = data;
+        model.reports = controller.setDate(data);
         view.init();
       })
   },
   getReports: () => {
     return model.reports;
+  },
+  setDate: (d) => {
+    return d.map(item => {
+      const date = new Date(item.date_reported);
+      const fixedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+      item['date'] = fixedDate;
+      return item;
+    });
   }
 }
 
@@ -139,6 +164,7 @@ let view = {
 
 controller.init();
 
+//switch that assigns proper icon to the map marker
 function iconSwitch(description){
   let icon;
   switch (description) {

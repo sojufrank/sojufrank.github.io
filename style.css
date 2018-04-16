@@ -70,7 +70,6 @@ nav a {
 
 .site-wrap {
   background: white;
-  text-align: justify;
   padding-bottom: 30px;
 }
 
@@ -103,6 +102,11 @@ a.anchor2 {
   font-size: 1em;
 }
 
+.projects-container {
+  margin: auto;
+  max-width: 1200px;
+}
+
 .projects {
   margin-top: 25px;
   padding-top: 25px;
@@ -126,6 +130,7 @@ a.anchor2 {
   position: relative;
   width: 100%;
   background: black;
+  max-width: 600px;
 }
 
 .card::before {
@@ -192,30 +197,6 @@ a.anchor2 {
   margin-bottom: 0;
 }
 
-/*
-#cars, #police, #calculator, #simon ::before {
-  display: block;
-  background: #eee;
-  text-align: center;
-}
-
-#cars ::before {
-  content: 'Seattle Cars Auction';
-}
-
-#police ::before {
-  content: 'Seattle Police Reports Map';
-}
-
-#calculator ::before {
-  content: 'Javascript Calculator';
-}
-
-#simon ::before {
-  content: 'Simon Says game';
-}
-*/
-
 #particles-js {
   background-color: rgb(35, 39, 65);
   height: 100%;
@@ -251,6 +232,15 @@ a.anchor2 {
 
 .landing-title {
   font-size: 3em;
+}
+
+.contact-container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.contact-title {
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {

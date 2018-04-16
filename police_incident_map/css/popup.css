@@ -60,11 +60,29 @@ html, body {
   left: 0;
   transform: translate(-50%, -100%);
   /* Style the info window. */
-  background-color: white;
   padding: 5px;
   border-radius: 5px;
   font-family: sans-serif;
   overflow-y: auto;
-  max-height: 60px;
+  /*max-height: 60px;*/
   box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+  /*mycss*/
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+  width: auto;
+  height: auto;
+  text-align: center;
 }
+
+/*
+.popup-bubble-content::after {
+  position: absolute;
+  content: '';
+  top: 1em;
+  bottom: 1em;
+  left: 1em;
+  right: 1em;
+  background: white;
+  opacity: .1;
+}
+*/

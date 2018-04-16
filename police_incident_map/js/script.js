@@ -8,10 +8,15 @@
     if it is put into a module design pattern.  For that reason I had to
     create this ultra long function.
 */
-function initMap() {
-  definePopupClass();
 
-  const data = controller.getReports();
+let link = `https://data.seattle.gov/resource/policereport.json?$order=date_reported DESC&$limit=50000`
+let link2 = `https://data.seattle.gov/resource/policereport.json?$where=year=2017 and month=12&$limit=50000`
+
+function initMap(arg1) {
+  definePopupClass();
+  let data;
+  (arg1)? data = arg1 : data = controller.getReports();
+
   console.log(data);
 
   const map = mapModule.makeMap();
@@ -86,12 +91,22 @@ let mapModule = {
 
   //returns content to put into popup window
   makeContent: (data) => {
-    //return data.offense_type;
-
     return `
-      <h2 class="title">${data.summarized_offense_description}</h2>
-      <p><label>Date: </label> ${data.date}</p>
-      <p><label>Address: </label> ${data.hundred_block_location}</p>
+      <h1 class="title">${data.summarized_offense_description}</h1>
+      <div class="table-container">
+        <div>
+          <table class="content-table">
+            <tr>
+              <td>Date:  </td>
+              <td>${data.date}</td>
+            </tr>
+            <tr>
+              <td>Address:  </td>
+              <td>${data.hundred_block_location}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     `
   }
 }
@@ -130,12 +145,37 @@ let controller = {
     return model.reports;
   },
   setDate: (d) => {
+    console.log(d)
     return d.map(item => {
       const date = new Date(item.date_reported);
-      const fixedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+      const fixedDate = `${item.month}/${date.getDate()}/${item.year}`
       item['date'] = fixedDate;
       return item;
     });
+  },
+  getFifty:() => {
+    const link = `https://data.seattle.gov/resource/policereport.json?$order=date_reported DESC&$limit=50000`;
+    fetch(link)
+      .then(res => res.json())
+      .then(data => {
+        data = controller.setDate(data)
+        initMap(data);
+      })
+  },
+  getFiltered:(month, year) => {
+
+    const m = month.toString();
+    const y = year.toString();
+
+    let link2 = `https://data.seattle.gov/resource/policereport.json?$where=year=2017 and month=12&$limit=50000`
+    const url = `https://data.seattle.gov/resource/policereport.json?$where=year=${y} and month=${m}&$limit=50000`;
+
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      data = controller.setDate(data);
+      initMap(data)
+    })
   }
 }
 
@@ -145,6 +185,7 @@ let view = {
     load.classList.add('hidden');
 
     view.loadMap();
+    view.button();
   },
   /*this is a weird place to put this function but it technically writes a
     html script tag to the dom so i placed it in the view
@@ -159,6 +200,28 @@ let view = {
     */
     js_file.src = `https://maps.googleapis.com/maps/api/js?key=${api}&callback=initMap`;
     document.getElementsByTagName('head')[0].appendChild(js_file);
+  },
+  button:()=>{
+
+    /*
+    const test = document.querySelector('.test');
+    test.addEventListener('click',initMap);
+    */
+
+    const fifty = document.querySelector('.fifty-button');
+    fifty.addEventListener('click',controller.getFifty);
+
+    const btn = document.querySelector('.form-button');
+    btn.addEventListener('click', () => {
+      const month = document.querySelector('#month');
+      const year = document.querySelector('#year');
+
+      const m = month.options[month.selectedIndex].value;
+      const y = year.options[year.selectedIndex].value;
+
+      controller.getFiltered(m,y);
+    })
+
   }
 }
 

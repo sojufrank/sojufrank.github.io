@@ -4,56 +4,98 @@
 <head>
   <meta charset="UTF-8">
   <title>title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/popup.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <div class="cube-container loader">
+    <div class="sk-cube-grid">
+      <div class="sk-cube sk-cube1"></div>
+      <div class="sk-cube sk-cube2"></div>
+      <div class="sk-cube sk-cube3"></div>
+      <div class="sk-cube sk-cube4"></div>
+      <div class="sk-cube sk-cube5"></div>
+      <div class="sk-cube sk-cube6"></div>
+      <div class="sk-cube sk-cube7"></div>
+      <div class="sk-cube sk-cube8"></div>
+      <div class="sk-cube sk-cube9"></div>
+    </div>
+  </div>
   <div class="container">
     <div class="sidebar">
-      <h1>Car Filter</h1>
-      <div>get last 50k getReports
-        <button class="fifty-button">GET 50K</button>
+      <div class="sidebar-title">
+        Seattle Incident Reports
       </div>
-      <div class="form">
-        <select id="month">
-          <option value="1" selected>January</option>
-          <option value="2">Feburary</option>
-          <option value="3">March</option>
-          <option value="4">April</option>
-          <option value="5">May</option>
-          <option value="6">June</option>
-          <option value="7">July</option>
-          <option value="8">August</option>
-          <option value="9">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
-        </select>
-        <select id="year">
-          <option value="2018" selected>2018</option>
-          <option value="2017">2017</option>
-          <option value="2016">2016</option>
-          <option value="2015">2015</option>
-          <option value="2014">2014</option>
-          <option value="2013">2013</option>
-          <option value="2012">2012</option>
-        </select>
-        <button class="form-button">submit</button>
+      <div class="sidebar-container">
+        <div class="display">
+          <div class="report-quantity">
+            <label>Currently viewing </label>
+            <span class="report-quantity-value"></span>
+            <span> reports</span>
+          </div>
+        </div>
       </div>
+      <div class="sidebar-container">
+        <div class="fifty-text">
+          Map last 50,000 reports
+          <button class="fifty-button">GET 50K</button>
+        </div>
+      </div>
+      <div class="sidebar-container">
+        <div class="form-text">
+          Submit month and year to get reports
+        </div>
+        <div class="form">
+          <select id="month">
+            <option value="1" selected>January</option>
+            <option value="2">Feburary</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <select id="year">
+            <option value="2018" selected>2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+          </select>
+          <button class="form-button">submit</button>
+        </div>
+      </div>
+      <div class="sidebar-container">
+        <div class="select-text">
+          Filter results by offense type
+        </div>
+        <div class="select-container">
+        </div>
+      </div>
+      <div class="sidebar-container">
+        <div class="offense-display">
 
-      </form>
+        </div>
+      </div>
     </div>
     <div id="map"></div>
+
+
   </div>
-  <div class="loader"></div>
-
   <div class="content-parent"></div>
-
 </body>
 <script type="text/javascript" src="js/popup.js"></script>
 <script type="text/javascript" src="js/map_background_color.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Archivo+Black|Open+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black|Open+Sans|Roboto" rel="stylesheet">
 
 </html>

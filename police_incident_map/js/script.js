@@ -9,17 +9,15 @@
     create this ultra long function.
 */
 
-let link = `https://data.seattle.gov/resource/policereport.json?$order=date_reported DESC&$limit=50000`
-let link2 = `https://data.seattle.gov/resource/policereport.json?$where=year=2017 and month=12&$limit=50000`
-
-function initMap(arg1) {
+function initMap() {
   definePopupClass();
-  let data;
-  (arg1)? data = arg1 : data = controller.getReports();
-
-  console.log(data);
-
+  let data = controller.getReports();
   const map = mapModule.makeMap();
+  const a = document.querySelector('.offense-select');
+
+  if(a.value != "ALL"){
+    data = data.filter(item => item.summarized_offense_description == a.value)
+  }
 
   data.forEach(item => {
     const myLatLng = mapModule.getCoords(item.latitude, item.longitude, item.location);
@@ -116,6 +114,7 @@ let model = {
     this.uri = `https://data.seattle.gov/resource/policereport.json`;
   },
   reports: {},
+  meta:{},
   getUrl: () => {
     return self.uri;
   },
@@ -129,8 +128,11 @@ let model = {
 
 let controller = {
   init: () => {
+    const self = this;
+    this.viewLoaded = false;
     model.init();
     controller.getData(model.getUrl())
+
   },
   getData: (url) => {
     fetch(url)
@@ -138,14 +140,25 @@ let controller = {
       .catch(err => console.log(err))
       .then(data => {
         model.reports = controller.setDate(data);
-        view.init();
+        controller.setMeta(data);
+        view.loadSideBar();
+        view.createSelect();
+        view.createOffenseDisplay();
+
+        if(self.viewLoaded == true) initMap();
+        else{
+          self.viewLoaded = true;
+          view.init()
+        }
       })
   },
   getReports: () => {
     return model.reports;
   },
+  getMeta: () => {
+    return model.meta;
+  },
   setDate: (d) => {
-    console.log(d)
     return d.map(item => {
       const date = new Date(item.date_reported);
       const fixedDate = `${item.month}/${date.getDate()}/${item.year}`
@@ -153,29 +166,30 @@ let controller = {
       return item;
     });
   },
+  setMeta:(data)=>{
+    let seen = {};
+    let a = data.filter(item => {
+      if(seen.hasOwnProperty(item.summarized_offense_description)){
+        seen[item.summarized_offense_description]++;
+        return false;
+      } else {
+        seen[item.summarized_offense_description] = 1;
+      }
+    });
+
+    model.meta.summarized_offense_description = seen;
+  },
   getFifty:() => {
     const link = `https://data.seattle.gov/resource/policereport.json?$order=date_reported DESC&$limit=50000`;
-    fetch(link)
-      .then(res => res.json())
-      .then(data => {
-        data = controller.setDate(data)
-        initMap(data);
-      })
+    controller.getData(link);
   },
   getFiltered:(month, year) => {
 
     const m = month.toString();
     const y = year.toString();
 
-    let link2 = `https://data.seattle.gov/resource/policereport.json?$where=year=2017 and month=12&$limit=50000`
     const url = `https://data.seattle.gov/resource/policereport.json?$where=year=${y} and month=${m}&$limit=50000`;
-
-    fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      data = controller.setDate(data);
-      initMap(data)
-    })
+    controller.getData(url);
   }
 }
 
@@ -201,12 +215,58 @@ let view = {
     js_file.src = `https://maps.googleapis.com/maps/api/js?key=${api}&callback=initMap`;
     document.getElementsByTagName('head')[0].appendChild(js_file);
   },
-  button:()=>{
+  loadSideBar:()=>{
+    const quantity = document.querySelector('.report-quantity-value');
+    quantity.innerHTML = controller.getReports().length;
+  },
+  createSelect:() => {
+    const meta = controller.getMeta().summarized_offense_description;
+    const container = document.querySelector('.select-container');
+    container.innerHTML = '';
 
-    /*
-    const test = document.querySelector('.test');
-    test.addEventListener('click',initMap);
-    */
+    const select = document.createElement('select');
+    select.classList.add('offense-select');
+    container.appendChild(select);
+    select.options.add(new Option('ALL','ALL'));
+
+    Object.keys(meta).sort().forEach(item => {
+      select.options.add(new Option(`${item} : ${meta[item]}`, item));
+    });
+
+    const elem = document.querySelector('.select-container');
+
+    elem.addEventListener('change',() => initMap())
+  },
+  createOffenseDisplay: () => {
+    const meta = controller.getMeta().summarized_offense_description;
+    const display = document.querySelector('.offense-display');
+
+    const table = document.createElement('table');
+    table.classList.add('offense-table');
+
+    Object.keys(meta).sort().forEach(item => {
+      console.log(item)
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td');
+      const td2 = document.createElement('td');
+      let cell1;
+
+      item.length > 20 ?
+        cell1 = document.createTextNode(item.slice(0,20)) :
+        cell1 = document.createTextNode(item);
+
+      const cell2 = document.createTextNode(meta[item]);
+      td1.appendChild(cell1);
+      td2.appendChild(cell2);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      table.appendChild(tr);
+
+    })
+
+    display.appendChild(table);
+  },
+  button:()=>{
 
     const fifty = document.querySelector('.fifty-button');
     fifty.addEventListener('click',controller.getFifty);
@@ -221,7 +281,6 @@ let view = {
 
       controller.getFiltered(m,y);
     })
-
   }
 }
 

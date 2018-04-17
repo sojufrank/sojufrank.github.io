@@ -1,6 +1,7 @@
 /*fonts
 font-family: 'Open Sans', sans-serif;
 font-family: 'Archivo Black', sans-serif;
+font-family: 'Roboto', sans-serif;
 */
 
 #map {
@@ -11,14 +12,77 @@ font-family: 'Archivo Black', sans-serif;
 /* Optional: Makes the sample page fill the window. */
 
 html, body, .container {
-  height: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  background: black;
+  color: white;
 }
 
 .container {
   display: grid;
   grid-template-columns: 2fr 8fr;
+}
+
+.sidebar {
+  background: black;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sidebar-title {
+  background: #009688;
+  max-width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: 'Archivo Black', sans-serif;
+}
+
+.sidebar-container {
+  position: relative;
+  margin-top: 30px;
+  margin-left: 25px;
+  margin-right: 25px;
+  max-width: 90%;
+}
+
+button {
+  margin-left: 10px;
+  max-width: 80px;
+  height: 40px;
+  border-radius: 5px;
+  border: 3px solid #5C6BC0;
+  background: #5C6BC0;
+  color: white;
+}
+
+.form {
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+
+select {
+  font: inherit;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.select-container {
+  margin-top: 10px;
+}
+
+select {
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.offense-display {
+  display: flex;
+}
+
+.offense-table {
+  border-spacing: 10px 0px;
 }
 
 .table-container {
@@ -35,31 +99,143 @@ html, body, .container {
   font-family: 'Archivo Black', sans-serif;
 }
 
-.loader {
-  border: 16px solid #f3f3f3;
-  /* Light grey */
-  border-top: 16px solid #3498db;
-  /* Blue */
-  border-radius: 50%;
-  width: 250px;
-  height: 250px;
-  animation: spin 2s linear infinite;
-  align-content: center;
-  margin: auto;
-  position: relative;
-  top: 30%;
-  transform: translateY(-50%);
+.fifty-text::after {
+  content: "takes up to 30 seconds";
+  position: absolute;
+  background: transparent;
+  color: transparent;
+  opacity: 0;
+  text-align: center;
+  display: block;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.fifty-text:hover::after {
+  padding: 5px;
+  border-radius: 10px;
+  background: firebrick;
+  color: white;
+  opacity: 1;
+  transition: opacity ease-in .2s;
 }
 
 .hidden {
   display: none;
+}
+
+.cube-container {
+  position: relative;
+}
+
+.sk-cube-grid {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  max-width: 200px;
+  max-height: 200px;
+  margin: 100px auto;
+}
+
+.sk-cube-grid .sk-cube {
+  max-width: 33%;
+  max-height: 33%;
+  background-color: firebrick;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    -webkit-transform: scale3D(0, 0, 1);
+    transform: scale3D(0, 0, 1);
+  }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    -webkit-transform: scale3D(0, 0, 1);
+    transform: scale3D(0, 0, 1);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    max-width: 200px;
+    font-size: 1em;
+  }
+  button {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .sidebar {
+    max-width: 100px;
+    font-size: .7em;
+  }
+  .offense-display {
+    display: none;
+  }
+  select {
+    font: inherit;
+    max-width: 100%;
+    text-overflow: ellipsis;
+  }
+  button {
+    margin-left: 0px;
+    margin-top: 10px;
+  }
 }

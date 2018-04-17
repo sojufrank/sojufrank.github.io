@@ -188,6 +188,14 @@ a.anchor2 {
   transition: opacity ease-out 250ms;
 }
 
+.card-title {
+  font-size: 2em;
+}
+
+.card-body {
+  font-size: 1em;
+}
+
 .card:hover .card-text {
   opacity: 1;
 }
@@ -243,7 +251,7 @@ a.anchor2 {
   text-align: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .circle {
     width: 300px;
     height: 300px;
@@ -262,7 +270,7 @@ a.anchor2 {
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 425px) {
   .circle {
     width: 250px;
     height: 250px;
@@ -278,5 +286,11 @@ a.anchor2 {
   }
   .about-text {
     width: 80%;
+  }
+  .card-title {
+    font-size: 1em;
+  }
+  .card-body {
+    font-size: .7em;
   }
 }

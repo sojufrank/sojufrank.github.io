@@ -240,12 +240,12 @@ let view = {
   createOffenseDisplay: () => {
     const meta = controller.getMeta().summarized_offense_description;
     const display = document.querySelector('.offense-display');
+    display.innerHTML = '';
 
     const table = document.createElement('table');
     table.classList.add('offense-table');
 
     Object.keys(meta).sort().forEach(item => {
-      console.log(item)
       const tr = document.createElement('tr');
       const td1 = document.createElement('td');
       const td2 = document.createElement('td');

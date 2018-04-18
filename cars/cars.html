@@ -14,7 +14,7 @@
 
 <body>
   <!--- Header and Navbar --->
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="#">City of Seattle Cars</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,8 +42,8 @@
       <hr class="my-4">
       <p>Use the buttons shown below to display "current vehicles for sale", or "previous vehicles sold"</p>
       <p class="lead">
-        <a id="forsale" class="btn btn-dark btn-lg" role="button">For sale</a>
-        <a id="sold" class="btn btn-dark btn-lg" role="button">Sold</a>
+        <a id="forsale" class="btn btn-primary btn-lg" role="button">For sale</a>
+        <a id="sold" class="btn btn-primary btn-lg" role="button">Sold</a>
       </p>
     </div>
   </div>
@@ -53,17 +53,17 @@
     <div class="container">
 
       <div class="content-title">
-        <h4>Vehicles for sale</h4>
+        <h4 id="content-title-text">Vehicles currently for sale at auction</h4>
         <p>Click on items below to expand data</p>
       </div>
       <div class="listCars">
-        <ul class="listCars"></ul>
+        <ul class="listCars unorderedList"></ul>
       </div>
     </div>
   </div>
 
   <!--- footer --->
-  <div class="footer navbar-dark bg-dark">
+  <div class="footer navbar navbar-dark bg-primary">
     <div class="container-fluid">
       <div class="row">
         <!--Footer Bottom-->

@@ -2,12 +2,45 @@ body {
   width: 100%;
   max-width: 960px;
   margin: 0px auto;
-  background: white;
+  background: #212121;
 }
 
 .jumbotron {
   margin-bottom: 0px;
-  background: #CFD8DC;
+  background: #EEEEEE;
+  opacity: 0.9;
+}
+
+.makes-text, .models-text, .vehicleItem-text, .carInfo-container {
+  color: white;
+  border-radius: 5px;
+  margin: 2px;
+  padding: 5px;
+  padding-left: 25px;
+  font-size: 1.5em;
+}
+
+.makes-text {
+  background: #0D47A1;
+  color: white;
+}
+
+.models-text {
+  background: #1976D2;
+  color: white;
+}
+
+.vehicleItem-text {
+  background: #2196F3;
+}
+
+.carInfo-container {
+  background: #64B5F6;
+}
+
+td {
+  font-size: .8em;
+  padding-right: 25px;
 }
 
 .content {

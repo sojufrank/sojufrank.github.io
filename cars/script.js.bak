@@ -84,12 +84,7 @@ let model = {
 
   //returns parsed date object
   parseDate: (date) => {
-    const d = new Date(date);
-    const month = d.getMonth();
-    const day = d.getDate();
-    const year = d.getFullYear();
-    const parsedDate = `${month+1} / ${day} / ${year}`;
-    return parsedDate;
+    return new Date(date);
   },
 
   //add car make count to countObj
@@ -170,7 +165,6 @@ let view = {
   setButtons: () => {
     const soldButton = document.querySelector('#sold');
     const forsaleButton = document.querySelector('#forsale');
-    const text = document.querySelector('#content-title-text');
 
     const forsaleData = controller.getforsale();
     const soldData = controller.getsold();
@@ -179,12 +173,10 @@ let view = {
     soldButton.addEventListener('click', (e) => {
       document.querySelector('.listCars').innerHTML = '';
       view.writeApp(soldData);
-      text.innerHTML = 'Vehicles previously sold at auction';
     });
     forsaleButton.addEventListener('click', (e) => {
       document.querySelector('.listCars').innerHTML = '';
       view.writeApp(forsaleData);
-      text.innerHTML = 'Vehicles currently for sale at auction';
     });
   },
 
@@ -197,29 +189,75 @@ let view = {
     view.clickHandlers();
   },
 
+writeMakes:(data) => {
+  const elem = document.querySelector('.listCars');
+  const node = document.createElement('ul');
+
+  node.innerHTML = `
+      ${Object.keys(data).sort().map(item => {
+        return `
+          <div class="makes-container">
+            <div class="makes-text skip">
+              ${item}
+            </div>
+            <li class='makes-li' name="${item}"" data-make="${item}"></li>
+          </div>
+        `
+      }).join('')}
+  `;
+  elem.appendChild(node);
+},
+
+/*
   //writes vehicle make to the document
-  writeMakes:(data) => {
-    const elem = document.querySelector('.listCars');
+  writeMakes: (data) => {
+    const elem = document.querySelector('.listCars')
     const node = document.createElement('ul');
 
+    //write html node and fill it with vehicle make data from model.carsObj
     node.innerHTML = `
+      <div>
         ${Object.keys(data).sort().map(item => {
           return `
-            <div class="makes-container">
-              <div class="makes-text skip">
+            <div>
+              <li class='makes' name="${item}"" data-make="${item}">
                 ${item}
-              </div>
-              <li class='makes-li' name="${item}"" data-make="${item}"></li>
+              </li>
+            </div>
+          `
+        }).join('')}
+      </div>
+    `;
+    elem.appendChild(node);
+  },
+*/
+
+writeModels: (data) => {
+  const makes = document.querySelectorAll('.makes-li');
+  makes.forEach(make => {
+    const name = make.getAttribute('name');
+    const node = document.createElement('ul');
+    node.classList.add('hidden', 'unorderedList');
+
+    //write html node and fill it with vehicle model data from model.carsObj
+    node.innerHTML = `
+        ${Object.keys(data[name]).sort().map(item => {
+          return `
+            <div class="models-container">
+              <div class="models-text skip">${item}</div>
+              <li class="models-li" name="${item}" data-make="${make.dataset.make}" data-model="${item}"></li>
             </div>
           `
         }).join('')}
     `;
-    elem.appendChild(node);
-  },
+    make.appendChild(node);
+  })
+},
 
+/*
   //writes vehicle model to the document
   writeModels: (data) => {
-    const makes = document.querySelectorAll('.makes-li');
+    const makes = document.querySelectorAll('.makes');
     makes.forEach(make => {
       const name = make.getAttribute('name');
       const node = document.createElement('ul');
@@ -227,22 +265,54 @@ let view = {
 
       //write html node and fill it with vehicle model data from model.carsObj
       node.innerHTML = `
+        <div>
           ${Object.keys(data[name]).sort().map(item => {
             return `
-              <div class="models-container">
-                <div class="models-text skip">${item}</div>
-                <li class="models-li" name="${item}" data-make="${make.dataset.make}" data-model="${item}"></li>
+              <div>
+                <li class="models" name="${item}" data-make="${make.dataset.make}" data-model="${item}">
+                  ${item}
+                </li>
               </div>
             `
           }).join('')}
+        </div>
       `;
       make.appendChild(node);
     })
   },
 
+*/
+writeCars: (data) => {
+  const models = document.querySelectorAll('.models-li');
+  models.forEach(model => {
+    const carMake = model.dataset.make;
+    const carModel = model.dataset.model;
+    const node = document.createElement('ul');
+    node.classList.add('hidden', 'unorderedList');
+
+    //write html node and fill it with vehicle's data from model.carsObj
+    node.innerHTML = `
+        ${data[carMake][carModel].map((item, index) => {
+          return `
+            <div class="vehicleItem-container">
+              <div class="vehicleItem-text skip">
+                ${item.description} :
+                ${item.sale_price? `sold price: `+item.sale_price: `average price: `+item.average_price}
+              </div>
+              <li class='vehicleItem-li' data-make="${carMake}" data-model="${carModel}" data-index="${index}"></li>
+            </div>
+          `
+        }).join('')}
+    `;
+    model.appendChild(node);
+  });
+},
+
+
+/*
   //writes vehicle's to the document
   writeCars: (data) => {
-    const models = document.querySelectorAll('.models-li');
+    const models = document.querySelectorAll('.models');
     models.forEach(model => {
       const carMake = model.dataset.make;
       const carModel = model.dataset.model;
@@ -251,51 +321,80 @@ let view = {
 
       //write html node and fill it with vehicle's data from model.carsObj
       node.innerHTML = `
+        <div>
           ${data[carMake][carModel].map((item, index) => {
             return `
-              <div class="vehicleItem-container">
-                <div class="vehicleItem-text skip">
+              <div>
+                <li class='vehicleItem' data-make="${carMake}" data-model="${carModel}" data-index="${index}">
                   ${item.description} :
                   ${item.sale_price? `sold price: `+item.sale_price: `average price: `+item.average_price}
-                </div>
-                <li class='vehicleItem-li' data-make="${carMake}" data-model="${carModel}" data-index="${index}"></li>
+                </li>
               </div>
             `
           }).join('')}
+        </div>
       `;
       model.appendChild(node);
     });
   },
+*/
 
+
+//writes specific vehicle data
+writeCarInfo: (data) => {
+  const vehicles = document.querySelectorAll('.vehicleItem-li');
+  vehicles.forEach(vehicle => {
+    const make = vehicle.dataset.make;
+    const model = vehicle.dataset.model;
+    const index = vehicle.getAttribute('data-index');
+    const node = document.createElement('ul');
+    const shortVariable = data[make][model][index];
+    node.classList.add('hidden', 'unorderedList');
+
+    //writes all vehicle data into list nodes
+    node.innerHTML = `
+      <div class="carInfo-container noHide">
+        ${Object.keys(shortVariable).map(item => {
+          return `
+              <li class="noHide">${item}: ${shortVariable[item]}</li>
+          `
+        }).join('')}
+      </div>
+    `;
+    vehicle.appendChild(node);
+  })
+},
+
+/*
   //writes specific vehicle data
   writeCarInfo: (data) => {
-    const vehicles = document.querySelectorAll('.vehicleItem-li');
+    const vehicles = document.querySelectorAll('.vehicleItem');
     vehicles.forEach(vehicle => {
       const make = vehicle.dataset.make;
       const model = vehicle.dataset.model;
       const index = vehicle.getAttribute('data-index');
       const node = document.createElement('ul');
       const shortVariable = data[make][model][index];
-      node.classList.add('hidden', 'unorderedList');
+      node.classList.add('hidden', 'unorderedList', 'dontHideOnClick');
 
       //writes all vehicle data into list nodes
       node.innerHTML = `
-        <div class="carInfo-container noHide">
-          <table class="noHide">
-            ${Object.keys(shortVariable).map(item => {
-              return `
-                <tr class="noHide">
-                  <td>${item.replace("_", " ")}: </td>
-                  <td>${shortVariable[item]}</td>
-                </tr>
-              `
-            }).join('')}
-          </table>
+        <div>
+          ${Object.keys(shortVariable).map(item => {
+            return `
+              <div>
+                <li class="dontHideOnClick">${item}: ${shortVariable[item]}</li>
+              </div>
+            `
+          }).join('')}
         </div>
       `;
       vehicle.appendChild(node);
     })
   },
+*/
+
+
 
   //set click handlers to all vehicles makes, models
   clickHandlers: () => {
@@ -309,16 +408,17 @@ let view = {
 
   },
 
-  //sets specific behavior on click
   setClick: (arr) => {
     arr.forEach(item => {
       item.addEventListener('click', (e) => {
         e.stopPropagation();
         let domNode = e.target.nextElementSibling;
+        //console.log(domNode)
 
         let shortVar;
 
         const arr = Array.from(domNode.children);
+        //console.log(domNode.children)
 
         arr.forEach(item => {
           if(item.tagName == "UL"){
@@ -326,32 +426,106 @@ let view = {
           }
         })
 
+
         if(shortVar.classList.contains('hidden')){
           shortVar.classList.remove('hidden')
         } else {
           shortVar.classList.add('hidden');
+          //console.log(shortVar);
           rec(shortVar)
         }
-      });
 
-      /* recursive funtion to traverse dom and returning on if conditions
-        upon release of stack, adds hidden class to any 'UL' tagName
-      */
-      function rec(data){
 
-        if(data.classList.contains('noHide') || data.classList.contains('skip')) return;
 
-        const arr = Array.from(data.children);
+        function rec(data){
+          //console.log(data)
+          if(data.classList.contains('noHide') || data.classList.contains('skip')) return;
 
-        arr.forEach(item => {
-          rec(item);
-          if(item.tagName =="UL"){
-            item.classList.add('hidden');
+          const arr = Array.from(data.children);
+
+          arr.forEach(item => {
+            //console.log(item);
+            rec(item);
+            if(item.tagName =="UL"){
+              item.classList.add('hidden');
+            }
+          })
+
+
+        }
+
+        /*
+        //adds or removes .hidden css property to show/hide data
+        for (let i = 0; i < domNode.children.length; i++) {
+          if (domNode.children[i].tagName != 'svg') {
+            const shortVar = domNode.children[i];
+
+            if (shortVar.classList.contains('hidden')) {
+              shortVar.classList.remove('hidden')
+            } else {
+              shortVar.classList.add('hidden')
+              recDom2(domNode.children);
+            }
           }
-        })
-      }
+        }
+        */
+
+        /*
+          recursive function to traverse dom nodes
+          upon stack release finds 'ul' dom nodes and hides it
+        */
+      });
     });
-  },
+  }
 }
+/*
+  //setting click handlers
+  setClick: (arr) => {
+    arr.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let domNode = e.target;
+
+        //if clicked dom node is a svg icon, get parent element
+        if (e.target.tagName == 'path') {
+          domNode = e.target.parentElement.parentElement;
+        } else if (e.target.tagName == 'svg') {
+          domNode = e.target.parentElement;
+        }
+
+        //adds or removes .hidden css property to show/hide data
+        for (let i = 0; i < domNode.children.length; i++) {
+          if (domNode.children[i].tagName != 'svg') {
+            const shortVar = domNode.children[i];
+
+            if (shortVar.classList.contains('hidden')) {
+              shortVar.classList.remove('hidden')
+            } else {
+              shortVar.classList.add('hidden')
+              recDom2(domNode.children);
+            }
+          }
+        }
+
+
+          //recursive function to traverse dom nodes
+          //upon stack release finds 'ul' dom nodes and hides it
+
+        function recDom2(node) {
+          if (node.length == 0) {
+            return
+          }
+          for (let i = 0; i < node.length; i++) {
+            recDom2(node[i].children)
+            if (node[i].tagName == 'UL') {
+              node[i].classList.add('hidden');
+            }
+          }
+        }
+      });
+    });
+  }
+}
+*/
 
 controller.init();

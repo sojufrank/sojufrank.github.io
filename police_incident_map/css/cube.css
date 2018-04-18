@@ -88,3 +88,10 @@
     transform: scale3D(0, 0, 1);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .sk-cube-grid {
+    width: 100px;
+    height: 100px;
+  }
+}

@@ -1,0 +1,168 @@
+html, body {
+  height: 100%;
+}
+
+.container {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.main-display {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 5px;
+  background: #EEEEEE;
+  font-family: 'Roboto', sans-serif;
+}
+
+.main-title {
+  font-size: 3em;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1em;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.display-line {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #E0E0E0;
+}
+
+.main-text p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.main-button {
+  margin-bottom: 16px;
+}
+
+.mdl-button {
+  width: 100px;
+}
+
+.spacer {
+  padding: 5px;
+}
+
+.content-title {
+  font-family: 'Roboto', sans-serif;
+}
+
+#content-title-text {
+  font-family: 'Roboto', sans-serif;
+}
+
+.content {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 5px;
+  background: #BDBDBD;
+}
+
+.makes-list {}
+
+.models-container, .vehicle-container, .carInfo-container {
+  margin-left: 25px;
+}
+
+.makes-text, .models-text, .vehicle-text, .car-table {
+  font-size: 2em;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 15px;
+  color: white;
+  font-family: 'Cabin', sans-serif;
+}
+
+.makes-text {
+  background: #0D47A1;
+}
+
+.models-text {
+  background: #1976D2;
+}
+
+.vehicle-text {
+  background: #2196F3;
+}
+
+.carInfo-container {
+  background: #64B5F6;
+  border-radius: 5px;
+  font-size: .7em;
+}
+
+td {
+  padding-right: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+.footer {
+  background-color: #0D47A1;
+  padding-left: 25px;
+  padding-bottom: 5px;
+  padding-top: 15px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-title {
+    font-size: 2.5em;
+  }
+  .models-container, .vehicle-container, .carInfo-container {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .main-title {
+    font-size: 2.5em;
+  }
+  .models-container, .vehicle-container, .carInfo-container {
+    margin-left: 10px;
+    line-height: 2em;
+  }
+  .makes-text, .models-text, .vehicle-text, .car-table {
+    font-size: 1.8em;
+  }
+  .carInfo-container {
+    font-size: .7em;
+  }
+  td {
+    padding-right: 2px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .main-title {
+    font-size: 2.5em;
+  }
+  .models-container, .vehicle-container, .carInfo-container {
+    margin-left: 0px;
+    line-height: 2em;
+  }
+  .makes-text, .models-text, .vehicle-text, .car-table {
+    font-size: 1.5em;
+  }
+  .carInfo-container {
+    font-size: .6em;
+  }
+  td {
+    padding-right: 2px;
+  }
+}

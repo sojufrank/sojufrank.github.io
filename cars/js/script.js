@@ -174,15 +174,15 @@ let view = {
 
     const forsaleData = controller.getforsale();
     const soldData = controller.getsold();
-    document.querySelector('.listCars').innerHTML = '';
+    document.querySelector('.makes-list').innerHTML = '';
 
     soldButton.addEventListener('click', (e) => {
-      document.querySelector('.listCars').innerHTML = '';
+      document.querySelector('.makes-list').innerHTML = '';
       view.writeApp(soldData);
       text.innerHTML = 'Vehicles previously sold at auction';
     });
     forsaleButton.addEventListener('click', (e) => {
-      document.querySelector('.listCars').innerHTML = '';
+      document.querySelector('.makes-list').innerHTML = '';
       view.writeApp(forsaleData);
       text.innerHTML = 'Vehicles currently for sale at auction';
     });
@@ -199,8 +199,7 @@ let view = {
 
   //writes vehicle make to the document
   writeMakes:(data) => {
-    const elem = document.querySelector('.listCars');
-    const node = document.createElement('ul');
+    const node = document.querySelector('.makes-list');
 
     node.innerHTML = `
         ${Object.keys(data).sort().map(item => {
@@ -209,79 +208,70 @@ let view = {
               <div class="makes-text skip">
                 ${item}
               </div>
-              <li class='makes-li' name="${item}"" data-make="${item}"></li>
+              <div class="drawer makes-drawer hidden" name="${item}" data-make="${item}"></div>
             </div>
           `
         }).join('')}
     `;
-    elem.appendChild(node);
   },
 
   //writes vehicle model to the document
   writeModels: (data) => {
-    const makes = document.querySelectorAll('.makes-li');
+    const makes = document.querySelectorAll('.makes-drawer');
     makes.forEach(make => {
       const name = make.getAttribute('name');
-      const node = document.createElement('ul');
-      node.classList.add('hidden', 'unorderedList');
 
       //write html node and fill it with vehicle model data from model.carsObj
-      node.innerHTML = `
+      make.innerHTML = `
           ${Object.keys(data[name]).sort().map(item => {
             return `
               <div class="models-container">
                 <div class="models-text skip">${item}</div>
-                <li class="models-li" name="${item}" data-make="${make.dataset.make}" data-model="${item}"></li>
+                <div class="drawer models-drawer hidden" name="${item}" data-make="${make.dataset.make}" data-model="${item}"></div>
               </div>
             `
           }).join('')}
       `;
-      make.appendChild(node);
     })
   },
 
   //writes vehicle's to the document
   writeCars: (data) => {
-    const models = document.querySelectorAll('.models-li');
+    const models = document.querySelectorAll('.models-drawer');
     models.forEach(model => {
       const carMake = model.dataset.make;
       const carModel = model.dataset.model;
-      const node = document.createElement('ul');
-      node.classList.add('hidden', 'unorderedList');
 
       //write html node and fill it with vehicle's data from model.carsObj
-      node.innerHTML = `
+      model.innerHTML = `
           ${data[carMake][carModel].map((item, index) => {
             return `
-              <div class="vehicleItem-container">
-                <div class="vehicleItem-text skip">
+              <div class="vehicle-container">
+                <div class="vehicle-text skip">
                   ${item.description} :
                   ${item.sale_price? `sold price: `+item.sale_price: `average price: `+item.average_price}
                 </div>
-                <li class='vehicleItem-li' data-make="${carMake}" data-model="${carModel}" data-index="${index}"></li>
+                <div class="drawer vehicle-drawer hidden" data-make="${carMake}" data-model="${carModel}" data-index="${index}"></div>
               </div>
             `
           }).join('')}
       `;
-      model.appendChild(node);
     });
   },
 
   //writes specific vehicle data
   writeCarInfo: (data) => {
-    const vehicles = document.querySelectorAll('.vehicleItem-li');
+    const vehicles = document.querySelectorAll('.vehicle-drawer');
     vehicles.forEach(vehicle => {
       const make = vehicle.dataset.make;
       const model = vehicle.dataset.model;
       const index = vehicle.getAttribute('data-index');
-      const node = document.createElement('ul');
       const shortVariable = data[make][model][index];
-      node.classList.add('hidden', 'unorderedList');
 
       //writes all vehicle data into list nodes
-      node.innerHTML = `
+      vehicle.innerHTML = `
         <div class="carInfo-container noHide">
-          <table class="noHide">
+          <table class="car-table noHide">
             ${Object.keys(shortVariable).map(item => {
               return `
                 <tr class="noHide">
@@ -293,7 +283,6 @@ let view = {
           </table>
         </div>
       `;
-      vehicle.appendChild(node);
     })
   },
 
@@ -301,7 +290,7 @@ let view = {
   clickHandlers: () => {
     const makes = document.querySelectorAll('.makes-text');
     const models = document.querySelectorAll('.models-text');
-    const cars = document.querySelectorAll('.vehicleItem-text');
+    const cars = document.querySelectorAll('.vehicle-text');
 
     view.setClick(makes);
     view.setClick(models);
@@ -316,26 +305,16 @@ let view = {
         e.stopPropagation();
         let domNode = e.target.nextElementSibling;
 
-        let shortVar;
-
-        const arr = Array.from(domNode.children);
-
-        arr.forEach(item => {
-          if(item.tagName == "UL"){
-            shortVar = item;
-          }
-        })
-
-        if(shortVar.classList.contains('hidden')){
-          shortVar.classList.remove('hidden')
+        if(domNode.classList.contains('hidden')){
+          domNode.classList.remove('hidden')
         } else {
-          shortVar.classList.add('hidden');
-          rec(shortVar)
+          domNode.classList.add('hidden');
+          rec(domNode)
         }
       });
 
       /* recursive funtion to traverse dom and returning on if conditions
-        upon release of stack, adds hidden class to any 'UL' tagName
+        upon release of stack, adds hidden class to any div with classList 'drawer'
       */
       function rec(data){
 
@@ -345,7 +324,7 @@ let view = {
 
         arr.forEach(item => {
           rec(item);
-          if(item.tagName =="UL"){
+          if(item.classList.contains('drawer')){
             item.classList.add('hidden');
           }
         })

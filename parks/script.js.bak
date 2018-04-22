@@ -1,0 +1,70 @@
+
+let map
+/* Global function is needed to be used as a callback for html script tag that calls on google api */
+function initMap() {
+
+  map = mapController.makeMap()
+
+  const d = parksData
+
+  for(key in d){
+    const marker = mapController.makeMarker(d[key])
+    const content = mapController.makeContent(d[key])
+    const infoWindow = mapController.makeInfo(content)
+
+    mapController.clickHandler(map, marker, infoWindow)
+  }
+}
+
+const mapController = {
+  init: () => {
+    mapController.loadMapsScript()
+  },
+  loadMapsScript: () => {
+    const api = "AIzaSyDbESV5B5nIlPyzvqKs02R1HfcBC59RL8I"
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${api}&callback=initMap`
+    document.body.appendChild(script)
+  },
+
+  makeMap: () => {
+    const seattle = new google.maps.LatLng(47.6097,-122.3331)
+    return new google.maps.Map(document.getElementById('map'), {
+      center: seattle,
+      zoom: 15
+    })
+  },
+  makeMarker: (data) => {
+    const x = parseFloat(data.x)
+    const y = parseFloat(data.y)
+    return new google.maps.Marker({
+      position:new google.maps.LatLng(y,x),
+      map: map,
+      title: data.name
+    })
+  },
+  makeContent: (data) => {
+    return `
+      <div>${data.name}</div>
+      <div>${data.address}</div>
+      <div>
+        <div>
+        ${data.features.join('</div><div>')}
+        </div>
+      </div>
+    `
+  },
+  makeInfo: (content) => {
+    return new google.maps.InfoWindow({
+      content: content
+    })
+  },
+  clickHandler: (map, marker, infoWindow) => {
+    marker.addListener('click',()=>{
+      infoWindow.open(map,marker)
+    })
+  }
+}
+
+mapController.init()

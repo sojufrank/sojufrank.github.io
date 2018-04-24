@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 /*
 * === site ===
 */
@@ -181,10 +186,12 @@ nav a {
 
 .mypic {
   max-width: 384px;
+  border: 5px solid #673AB7;
   border-radius: 50%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .about-text-background {
@@ -202,81 +209,48 @@ nav a {
 * === projects ===
 */
 
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .projects-container {
   margin: auto;
   max-width: 1200px;
 }
 
-.projects {
-  margin-top: 25px;
-  padding-top: 25px;
-  background: white;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-#projects {
-  align-items: stretch;
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em;
-}
-
 .projects-header {
   text-align: center;
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 4em;
+}
+
+.projects-title {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.caret-up, .caret-down {
+  display: none;
 }
 
 .card {
-  position: relative;
-  width: 100%;
-  background: black;
-  max-width: 600px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 1.25em;
-  bottom: 1.25em;
-  left: 1.25em;
-  right: 1.25em;
-  transform: scale(0, 1);
-  transition: transform ease-out 250ms;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-}
-
-.card::after {
-  content: '';
-  position: absolute;
-  top: 1.25em;
-  bottom: 1.25em;
-  left: 1.25em;
-  right: 1.25em;
-  transform: scale(1, 0);
-  transition: transform ease-out 250ms;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-}
-
-.card:hover::before {
-  transform: scale(1.03, 1);
-}
-
-.card:hover::after {
-  transform: scale(1, 1.04);
+  max-height: 100%;
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 }
 
 .card img {
   max-width: 100%;
-  vertical-align: bottom;
-  opacity: 1;
+  opacity: .8;
   transition: opacity ease-out 250ms;
-}
-
-.card:hover .card-img {
-  opacity: 0.4;
 }
 
 .card-text {
@@ -287,18 +261,62 @@ nav a {
   color: white;
   opacity: 0;
   transition: opacity ease-out 250ms;
+  background: black;
+  width: 100%;
+  height: 100%;
+}
+
+.card-text:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.card-text::before {
+  position: absolute;
+  content: '';
+  top: 1.25em;
+  bottom: 1.25em;
+  left: 1.25em;
+  right: 1.25em;
+  transform: scale(0, 1);
+  transition: transform ease-out 250ms;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.card-text::after {
+  position: absolute;
+  content: '';
+  top: 1.25em;
+  bottom: 1.25em;
+  left: 1.25em;
+  right: 1.25em;
+  transform: scale(1, 0);
+  transition: transform ease-out 250ms;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.card-text:hover::before {
+  transform: scale(1.03, 1);
+}
+
+.card-text:hover::after {
+  transform: scale(1, 1.04);
 }
 
 .card-title {
+  padding-top: 8%;
   font-size: 2em;
+  text-align: center;
 }
 
 .card-body {
-  font-size: 1em;
+  font-size: 1.5em;
+  padding: 10%;
 }
 
 .card:hover .card-text {
-  opacity: 1;
+  opacity: .95;
 }
 
 .card-title {
@@ -324,15 +342,36 @@ nav a {
   nav ul {
     font-size: 1em;
   }
-  #projects {
-    grid-template-columns: 1fr;
-  }
   .mypic {
     max-width: 50%;
     border-radius: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+  .projects-header {
+    margin-bottom: 30%;
+    flex-direction: column;
+  }
+  .carousel-prev {
+    order: 2;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .carousel-next {
+    order: 3;
+  }
+  .caret-up, .caret-down {
+    display: block;
+  }
+  .caret-left, .caret-right {
+    display: none;
+  }
+  .card-title {
+    font-size: 2em;
+  }
+  .card-body {
+    font-size: 1em;
   }
 }
 
@@ -362,4 +401,15 @@ nav a {
   #mypic {
     max-width: 150px;
   }
+  .projects-header {
+    margin-bottom: 30%;
+  }
 }
+
+@media screen and (max-width: 320px) {
+  .card-title {
+    font-size: .7em;
+  }
+  .card-body {
+    font-size: .6em;
+  }

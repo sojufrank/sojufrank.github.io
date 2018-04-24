@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Frank Yi Portfolio</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="carousel.css">
 
 </head>
 
@@ -48,79 +49,131 @@
   </div>
 
   <!-- projects -->
+  <div class="projects-header">
+    <div class="carousel-prev">
+      <div class="caret-left">
+        <i class="fas fa-caret-left"></i>
+      </div>
+      <div class="caret-up">
+        <i class="fas fa-caret-up"></i>
+      </div>
+    </div>
+    <div class="projects-title">
+      Projects
+    </div>
+    <div class="carousel-next">
+      <div class="caret-right">
+        <i class="fas fa-caret-right"></i>
+      </div>
+      <div class="caret-down">
+        <i class="fas fa-caret-down"></i>
+      </div>
+    </div>
+  </div>
   <a id="projects-link" class="anchor2"></a>
-  <div class="projects-container">
-    <div class="projects">
-      <div class="projects-header">
-        <h1> Projects </h1>
-      </div>
-      <div id="projects">
-        <a href="police_incident_map/reports.html">
-          <div id="police" class="card">
-            <img class="card-img" src="img/police.jpg">
-            <div class="card-text">
-              <div class="card-title">Seattle Police Reports Map</div>
-              <div class="card-body">This app ingests data from data.seattle.gov and draws a google map and places markers based on geolocation information. A custom information window has been added and filters have been coded in.
+  <div class="projects-container noSelect">
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item" id="carousel-item-1">
+          <a href="police_incident_map/reports.html">
+            <div id="police" class="card">
+              <img class="card-img" src="img/police.jpg">
+              <div class="card-text">
+                <div class="card-title">Seattle Police Reports Map</div>
+                <div class="card-body">This app ingests data from data.seattle.gov and draws a google map and places markers based on geolocation information. A custom information window has been added and filters have been coded in.
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-        <a href="cars/cars.html">
-          <div id="cars" class="card">
-            <img class="card-img" src="img/cars.jpg">
-            <div class="card-text">
-              <div class="card-title">Seattle Cars Auction</div>
-              <div class="card-body">This app shows cars that are available for auction now and previous cars up for auction by the city of Seattle.
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="cars/cars.html">
+            <div id="cars" class="card">
+              <img class="card-img" src="img/cars.jpg">
+              <div class="card-text">
+                <div class="card-title">Seattle Cars Auction</div>
+                <div class="card-body">This app shows cars that are available for auction now and previous cars up for auction by the city of Seattle.
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="https://codepen.io/sojufrank/full/dpdzyb/">
+            <div id="calculator" class="card">
+              <img class="card-img" src="img/calculator.jpg">
+              <div class="card-text">
+                <div class="card-title">Javascript Calculator</div>
+                <div class="card-body">A responsive calculator written in pure Javascript. A MVC design was used to create this app for demonstration purposes.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="https://codepen.io/sojufrank/full/ALJEoK/">
+            <div id="simon" class="card">
+              <img class="card-img" src="img/simon.jpg">
+              <div class="card-text">
+                <div class="card-title">Simon Says game</div>
+                <div class="card-body">Would you like to try a game of Simon Says?
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
 
-        <a href="https://codepen.io/sojufrank/full/dpdzyb/">
-          <div id="calculator" class="card">
-            <img class="card-img" src="img/calculator.jpg">
-            <div class="card-text">
-              <div class="card-title">Javascript Calculator</div>
-              <div class="card-body">A responsive calculator written in pure Javascript. A MVC design was used to create this app for demonstration purposes.
+        <div class="carousel-item">
+          <a href="https://codepen.io/sojufrank/full/ALJEoK/">
+            <div id="simon" class="card">
+              <img class="card-img" src="img/simon.jpg">
+              <div class="card-text">
+                <div class="card-title">Simon Says game</div>
+                <div class="card-body">Would you like to try a game of Simon Says?
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
 
-        <a href="https://codepen.io/sojufrank/full/ALJEoK/">
-          <div id="simon" class="card">
-            <img class="card-img" src="img/simon.jpg">
-            <div class="card-text">
-              <div class="card-title">Simon Says game</div>
-              <div class="card-body">Try a small game of Simon Says!
+        <div class="carousel-item">
+          <a href="https://codepen.io/sojufrank/full/ALJEoK/">
+            <div id="simon" class="card">
+              <img class="card-img" src="img/simon.jpg">
+              <div class="card-text">
+                <div class="card-title">Simon Says game</div>
+                <div class="card-body">Would you like to try a game of Simon Says?
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- contacts -->
-    <div class="contact-container">
-      <div class="contact-title">
-        <h1>Contact</h1>
-      </div>
-      <div class="contact-form">
-        <form action="https://formspree.io/frankyiyi@gmail.com" method="POST">
-          <label>message</label>
-          <input type="text" name="name">
-          <label>your email</label>
-          <input type="email" name="_replyto">
-          <input type="submit" value="Send">
-        </form>
-        <i class="fab fa-linkedin"></i>
-        <i class="fab fa-github-square"></i>
-      </div>
+  <!-- contacts -->
+  <div class="contact-container">
+    <div class="contact-title">
+      <h1>Contact</h1>
     </div>
-    <script src="particles.js "></script>
-    <script src="script.js "></script>
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Graduate|Roboto " rel="stylesheet ">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <div class="contact-form">
+      <form action="https://formspree.io/frankyiyi@gmail.com" method="POST">
+        <label>message</label>
+        <input type="text" name="name">
+        <label>your email</label>
+        <input type="email" name="_replyto">
+        <input type="submit" value="Send">
+      </form>
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-github-square"></i>
+    </div>
+  </div>
+  <script src="particles.js "></script>
+  <script src="script.js "></script>
+  <script src="carousel.js "></script>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Graduate|Roboto " rel="stylesheet ">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
 
 </body>

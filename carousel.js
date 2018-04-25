@@ -32,6 +32,9 @@ function carousel(){
 
     next.addEventListener('click',(e)=>{
       degree = degree - carouselDegree
+      window.screen.availWidth <= 768 ?
+        carousel.style.webkitTransform = "rotateX("+degree+"deg)" :
+        carousel.style.webkitTransform = "rotateY("+degree+"deg)"
     })
 
     down.addEventListener('click',(e)=>{

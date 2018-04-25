@@ -159,7 +159,7 @@ nav a {
 */
 
 .about-wrapper {
-  margin-top: 32px;
+  margin-top: 128px;
   padding-top: 32px;
   margin-bottom: 32px;
   padding-bottom: 32px;
@@ -221,21 +221,27 @@ nav a {
 .projects-container {
   margin: auto;
   max-width: 1200px;
+  padding-bottom: 32px;
 }
 
 .projects-header {
+  margin-top: 128px;
   text-align: center;
   margin-bottom: 5%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.carousel-prev, .carousel-next {
   font-size: 4em;
 }
 
-.projects-title {
+.projects-title, .contact-title {
   margin-left: 10px;
   margin-right: 10px;
+  font-size: 4em;
 }
 
 .caret-up, .caret-down {
@@ -324,6 +330,79 @@ nav a {
   margin-bottom: 0;
 }
 
+/*contact*/
+
+.contact-container {
+  margin-top: 128px;
+  padding-top: 32px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.social {
+  text-align: center;
+  font-size: 4em;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: auto;
+}
+
+.form {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #EEEEEE;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form div {
+  margin-top: 16px;
+}
+
+.contact-message, .contact-email {
+  width: 90%;
+}
+
+.contact-text, .contact-email-address {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.contact-text {
+  resize: none;
+  height: 100px;
+}
+
+.submit-button {
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  margin-bottom: 16px;
+}
+
+.footer-container {
+  height: 64px;
+  background: #212121;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer {
+  padding-left: 32px;
+  color: white;
+}
+
 /*
 * === responsive media ===
 */
@@ -363,6 +442,21 @@ nav a {
   }
   .caret-up, .caret-down {
     display: block;
+    height: 1em;
+    background: #03A9F4;
+    width: 200px;
+    padding-top: 0;
+    border-radius: 5px;
+    color: white;
+  }
+  .caret-down-container {
+    margin-top: 25%;
+    display: flex;
+    justify-content: center;
+  }
+  .caret-down {
+    text-align: center;
+    font-size: 4em;
   }
   .caret-left, .caret-right {
     display: none;

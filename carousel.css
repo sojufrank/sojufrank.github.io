@@ -25,7 +25,7 @@
   border-radius: 10px;
 }
 
-.carousel-next, .carousel-prev {
+.caret-left, .caret-right {
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 5px;

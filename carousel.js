@@ -26,10 +26,15 @@ function carousel(){
   function setClickHandlers(){
     const next = document.querySelector('.carousel-next')
     const prev = document.querySelector('.carousel-prev')
+    const down = document.querySelector('.caret-down')
     const carousel = document.querySelector('.carousel')
     let degree = 0;
 
     next.addEventListener('click',(e)=>{
+      degree = degree - carouselDegree
+    })
+
+    down.addEventListener('click',(e)=>{
       degree = degree - carouselDegree
       window.screen.availWidth <= 768 ?
         carousel.style.webkitTransform = "rotateX("+degree+"deg)" :

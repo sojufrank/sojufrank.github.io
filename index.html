@@ -28,13 +28,13 @@
       <li class="logo"><a href="#home">Frank</a></li>
       <li><a href="#about-link">About</a></li>
       <li><a href="#projects-link">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact-link">Contact</a></li>
     </ul>
   </nav>
 
   <!-- about me -->
-  <div class="spacer"></div>
   <a id="about-link" class="anchor"></a>
+  </div>
   <div class="about-wrapper" id="about">
     <div class="about-card">
       <div class="picture">
@@ -49,6 +49,7 @@
   </div>
 
   <!-- projects -->
+  <a id="projects-link" class="anchor"></a>
   <div class="projects-header">
     <div class="carousel-prev">
       <div class="caret-left">
@@ -65,12 +66,8 @@
       <div class="caret-right">
         <i class="fas fa-caret-right"></i>
       </div>
-      <div class="caret-down">
-        <i class="fas fa-caret-down"></i>
-      </div>
     </div>
   </div>
-  <a id="projects-link" class="anchor2"></a>
   <div class="projects-container noSelect">
     <div class="carousel-container">
       <div class="carousel">
@@ -151,31 +148,63 @@
       </div>
     </div>
   </div>
+  <div class="caret-down-container">
+    <div class="caret-down">
+      <i class="fas fa-caret-down"></i>
+    </div>
+  </div>
+
 
   <!-- contacts -->
   <div class="contact-container">
     <div class="contact-title">
-      <h1>Contact</h1>
+      <div>Contact</div>
+    </div>
+    <a id="contact-link" class="anchor"></a>
+    <div class="social">
+      <a href="https://github.com/sojufrank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.linkedin.com/in/frank-yi-60ba0645"><i class="fab fa-github-square"></i></a>
     </div>
     <div class="contact-form">
       <form action="https://formspree.io/frankyiyi@gmail.com" method="POST">
-        <label>message</label>
-        <input type="text" name="name">
-        <label>your email</label>
-        <input type="email" name="_replyto">
-        <input type="submit" value="Send">
+        <div class="" style="margin:auto;max-width:600px">
+          <div class="form">
+            <div class="contact-message">
+              <div>message</div>
+              <textarea class="contact-text" type="text" name="name"></textarea>
+            </div>
+            <div class="contact-email">
+              <div>your email</div>
+              <input class="contact-email-address" type="email" name="_replyto">
+            </div>
+            <div class="contact-submit">
+              <input class="submit-button" type="submit" value="Send">
+            </div>
+          </div>
+        </div>
       </form>
-      <i class="fab fa-linkedin"></i>
-      <i class="fab fa-github-square"></i>
     </div>
   </div>
+
+  <!-- footer -->
+  <div class="footer-container">
+    <div class="footer">
+      <div class="">
+        <p>sojufrank.github.io</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- scripts -->
   <script src="particles.js "></script>
   <script src="script.js "></script>
   <script src="carousel.js "></script>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Graduate|Roboto " rel="stylesheet ">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-  
-  <script>console.log('test')</script>
+
+  <script>
+    console.log('test')
+  </script>
 
 </body>
 

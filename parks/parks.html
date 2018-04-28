@@ -5,11 +5,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>title</title>
-  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/toggle.css" type="text/css">
 </head>
 
 <body>
-  <div id="map"></div>
+  <div class="container">
+    <div class="info">
+      <div class="title-text">
+        Seattle Parks
+      </div>
+      <div class="toggles">
+        <div class="ada-toggle-container">
+          <div class="">
+            <span class="ada-text">
+              ada toggle
+            </span>
+          </div>
+          <div class="end">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="pesticide-toggle-container">
+          <span class="pesticide-text">
+            pesticide toggle
+          </span>
+          <div class="end">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="filter">
+        <div class="filter-text">
+          features select
+        </div>
+        <div class="select-container">
+        </div>
+      </div>
+    </div>
+    <div id="map"></div>
+  </div>
+
 </body>
 
 </html>

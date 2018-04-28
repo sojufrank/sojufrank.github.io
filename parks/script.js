@@ -9,7 +9,25 @@ const model = {
     this.urlArray = [fetch(url1),fetch(url2),fetch(url3)]
     controller.fetchData(this.urlArray)
   },
-  parkData: {}
+  fullParkData: (()=>{
+    let parkData = {}
+    let features = new Set()
+
+    return {
+      setParkData:(d)=>{
+        parkData = d
+      },
+      getParkData:()=>{
+        return parkData
+      },
+      setFeatures:(d)=>{
+        features.add(d)
+      },
+      getFeatures:()=>{
+        return features
+      }
+    }
+  })()
 }
 
 const controller = {
@@ -22,6 +40,7 @@ const controller = {
       .then(dataArray => {
         controller.parseData(dataArray)
         mapController.init()
+        view.init()
       })
   },
   parseData: (d) => {
@@ -35,7 +54,7 @@ const controller = {
     const addy = controller.makeAddy(obj2)
     const final = controller.makeFinal(obj1,addy)
 
-    model.parkData = final
+    model.fullParkData.setParkData(final)
   },
   parseD1: (data, data2) => {
     /*
@@ -138,6 +157,22 @@ const controller = {
           s.add(item.feature_desc)
         }
       })
+
+      temp[key]['ada'] = false
+      temp[key]['adaArray'] = []
+      temp[key]['pesticide'] = false
+      s.forEach(item => {
+        if(item.toUpperCase().includes('ADA') ){
+          temp[key]['ada'] = true
+          temp[key]['adaArray'].push(item)
+          s.delete(item)
+        }
+        if(item.toUpperCase().includes('PESTICIDE') ){
+          temp[key]['pesticide'] = true
+          s.delete(item)
+        }
+        model.fullParkData.setFeatures(item)
+      })
       temp[key]['features'] = Array.from(s)
     }
     return temp
@@ -150,7 +185,8 @@ function initMap() {
 
   map = mapController.makeMap()
 
-  const d = model.parkData
+  const d = model.fullParkData.getParkData()
+  console.log(d)
 
   for(key in d){
     const marker = mapController.makeMarker(d[key])
@@ -209,6 +245,28 @@ const mapController = {
     marker.addListener('click',()=>{
       infoWindow.open(map,marker)
     })
+  }
+}
+
+const view = {
+  init:()=> {
+    view.createSelect()
+  },
+  createSelect:()=>{
+    const container = document.querySelector('.select-container')
+    container.innerHTML = ''
+
+    const select = document.createElement('select')
+    select.classList.add('features-select')
+    container.appendChild(select)
+    select.options.add(new Option('ALL','ALL'))
+
+    let featuresArr = model.fullParkData.getFeatures()
+    featuresArr = Array.from(featuresArr).sort()
+
+    featuresArr.forEach(item => {
+      select.options.add(new Option(`${item}`, item));
+    });
   }
 }
 

@@ -9,6 +9,7 @@ const model = {
     this.urlArray = [fetch(url1),fetch(url2),fetch(url3)]
     controller.fetchData(this.urlArray)
   },
+  //incorporating module pattern to for park data
   fullParkData: (()=>{
     let parkData = {}
     let features = new Set()
@@ -185,12 +186,15 @@ function initMap() {
 
   map = mapController.makeMap()
 
-  const d = model.fullParkData.getParkData()
-  console.log(d)
+  let mapData = model.fullParkData.getParkData()
+  mapData = mapController.filterParks(mapData)
+  mapData = mapController.filterAda(mapData)
+  mapData = mapController.filterPest(mapData)
 
-  for(key in d){
-    const marker = mapController.makeMarker(d[key])
-    const content = mapController.makeContent(d[key])
+  for(key in mapData){
+
+    const marker = mapController.makeMarker(mapData[key])
+    const content = mapController.makeContent(mapData[key])
     const infoWindow = mapController.makeInfo(content)
 
     mapController.clickHandler(map, marker, infoWindow)
@@ -213,8 +217,48 @@ const mapController = {
     const seattle = new google.maps.LatLng(47.6097,-122.3331)
     return new google.maps.Map(document.getElementById('map'), {
       center: seattle,
-      zoom: 15
+      zoom: 14
     })
+  },
+  filterParks:(data)=>{
+    const select = document.querySelector('.features-select')
+    if(select.value == "ALL") return data
+    let array = []
+    for(const key in data){
+      if(data[key].features.includes(select.value)){
+        array.push(data[key])
+      }
+    }
+    return array
+  },
+  filterAda:(data)=>{
+    const bool = document.querySelector('.ada-check').checked
+    let obj = {}
+    if(bool){
+      for(const key in data){
+        if(data[key].ada == true) {
+          obj[key] = data[key]
+        }
+      }
+    } else {
+      return data
+    }
+    console.log(obj)
+    return obj
+  },
+  filterPest:(data)=>{
+    const bool = document.querySelector('.pesticide-check').checked
+    let obj = {}
+    if(bool){
+      for(const key in data){
+        if(data[key].pesticide == true) {
+          obj[key] = data[key]
+        }
+      }
+    } else {
+      return data
+    }
+    return obj
   },
   makeMarker: (data) => {
     const x = parseFloat(data.x)
@@ -226,31 +270,73 @@ const mapController = {
     })
   },
   makeContent: (data) => {
+    const ada = data.ada
+    const pest = data.pesticide
+
+    let adaText = ''
+    let pestText = ''
+    if(ada){
+      const features = data.adaArray.map(item => {
+        return `<div class="ada-feature">${item}</div>`
+      }).join('')
+      adaText = `
+        <div class='ada-window'>American Disabilities Act
+          <img class="wheelchair" src="img/wheelchair.svg">
+        </div>
+        ${features}
+      `
+    }
+    if(pest){
+      pestText = `<div class="pest-window"><span class='pest-window-span'>Pesticide Free</span></div>`
+    }
     return `
-      <div>${data.name}</div>
-      <div>${data.address}</div>
-      <div>
+      <div class="window">
         <div>
-        ${data.features.join('</div><div>')}
+          <div class="infowindow-title">
+            <span>
+              ${data.name}
+              <div class="title-line"></div>
+            </span>
+          </div>
+          ${pestText}
+          <div class='infowindow-address'>${data.address}</div>
+
+        </div>
+        <div>
+          ${adaText}
+          <div class="infowindow-location">Location Features</div>
+          <div class="infowindow-feature">${data.features.join('</div><div class="infowindow-feature">')}</div>
         </div>
       </div>
-    `
+`
   },
   makeInfo: (content) => {
     return new google.maps.InfoWindow({
       content: content
     })
   },
-  clickHandler: (map, marker, infoWindow) => {
+  clickHandler:(map, marker, infoWindow) => {
     marker.addListener('click',()=>{
-      infoWindow.open(map,marker)
+      if(mapController.markerArray.length >= 1){
+        mapController.markerArray.forEach(item => {
+          item.infoWindow.close(item.map,item.marker)
+        })
+        infoWindow.open(map,marker)
+        mapController.markerArray.push({infoWindow,map,marker})
+      }
+      else {
+        infoWindow.open(map,marker)
+        mapController.markerArray.push({infoWindow,map,marker})
+      }
     })
-  }
+  },
+  markerArray: []
 }
 
 const view = {
   init:()=> {
     view.createSelect()
+    view.changeHandler()
   },
   createSelect:()=>{
     const container = document.querySelector('.select-container')
@@ -267,6 +353,22 @@ const view = {
     featuresArr.forEach(item => {
       select.options.add(new Option(`${item}`, item));
     });
+  },
+  changeHandler:()=>{
+    const select = document.querySelector('.features-select')
+    const adaCheck = document.querySelector('.ada-check')
+    const pestCheck = document.querySelector('.pesticide-check')
+
+    select.addEventListener('change',(e)=>{
+      initMap()
+    })
+
+    adaCheck.addEventListener('change',(e)=>{
+      initMap()
+    })
+    pestCheck.addEventListener('change',(e)=>{
+      initMap()
+    })
   }
 }
 

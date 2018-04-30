@@ -1,0 +1,84 @@
+/* font
+font-family: 'Open Sans', sans-serif;
+font-family: 'PT Serif', serif;
+font-family: 'PT Sans', sans-serif;
+
+*/
+
+.window {
+  overflow: hidden;
+  line-height: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.ada-window, .pest-window {
+  font-size: 1.4em;
+}
+
+.ada-window {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.ada-feature:before {
+  content: '-';
+  padding-left: 8px;
+}
+
+.wheelchair {
+  width: 14px;
+}
+
+.pest-window {
+  margin-top: 16px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.pest-window-span {
+  background: #FFEB3B;
+  border-radius: 5px;
+  padding: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid black;
+}
+
+.pest-window:before, .pest-window:after {
+  content: ' ** '
+}
+
+.infowindow-title {
+  font-size: 2em;
+  text-align: center;
+  margin-top: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.title-line {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  border: 1px solid black;
+  opacity: .3;
+}
+
+.infowindow-address {
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.infowindow-location {
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.infowindow-feature {}
+
+.infowindow-feature:before {
+  content: '-';
+  padding-left: 8px;
+}

@@ -136,9 +136,7 @@ let model = {
       Object.keys(cars[make]).forEach(carModel => {
         
         try{
-          cars[make][carModel].map(item => item['average_price'] = 1000)
-        }
-        catch (error){
+
           const car = model.carsObj.sold[make][carModel];
           if (car) {
             const arr = car.map(item => item.sale_price);
@@ -146,6 +144,10 @@ let model = {
             const average = Math.round(sum / arr.length);
             cars[make][carModel].map(item => item['average_price'] = average)
           }
+        }
+        catch (error){
+          cars[make][carModel].map(item => item['average_price'] = 1000)
+
         }
       })
     })

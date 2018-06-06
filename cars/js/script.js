@@ -134,9 +134,11 @@ let model = {
     let cars = model.carsObj.forsale;
     Object.keys(cars).forEach(make => {
       Object.keys(cars[make]).forEach(carModel => {
-        if(make == "CANADIAN ELECTRIC VEHICLES LTD"){
+        
+        try{
           cars[make][carModel].map(item => item['average_price'] = 1000)
-        } else {
+        }
+        catch (error){
           const car = model.carsObj.sold[make][carModel];
           if (car) {
             const arr = car.map(item => item.sale_price);

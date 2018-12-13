@@ -111,7 +111,7 @@ let mapModule = {
 
 let model = {
   init: () => {
-    this.uri = `https://data.seattle.gov/resource/policereport.json`;
+    this.uri = `https://data.seattle.gov/resource/xurz-654a.json`;
   },
   reports: {},
   meta:{},
@@ -180,7 +180,7 @@ let controller = {
     model.meta.summarized_offense_description = seen;
   },
   getFifty:() => {
-    const link = `https://data.seattle.gov/resource/policereport.json?$order=date_reported DESC&$limit=50000`;
+    const link = `https://data.seattle.gov/resource/xurz-654a.json?$order=reported_date DESC&$limit=50000`;
     controller.getData(link);
   },
   getFiltered:(month, year) => {
@@ -188,7 +188,7 @@ let controller = {
     const m = month.toString();
     const y = year.toString();
 
-    const url = `https://data.seattle.gov/resource/policereport.json?$where=year=${y} and month=${m}&$limit=50000`;
+    const url = `https://data.seattle.gov/resource/xurz-654a.json?$where=year=${y} and month=${m}&$limit=50000`;
     controller.getData(url);
   }
 }

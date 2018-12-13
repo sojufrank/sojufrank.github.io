@@ -9,8 +9,25 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/cube.css">
 </head>
+<style>
+  .apiError {
+    position:absolute;
+    border:10px solid goldenrod;
+    border-radius:25px;
+    z-index: 100;
+    font-size:4em;
+    padding:100px;
+    margin:100px;
+    background:grey;
 
+
+    
+  }
+</style>
 <body>
+  <div class="apiError">
+    data.seattle.gov has changed the api and removed latitude and longitude data and have broken this app.  im sorry.  
+  </div>
   <div class="cube-container loader">
     <div class="sk-cube-grid">
       <div class="sk-cube sk-cube1"></div>

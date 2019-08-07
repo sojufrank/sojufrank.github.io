@@ -20,7 +20,7 @@ particlesJS.load('particles-js', 'particlesjs-config.json', () => {
 })
 
 const model = {
-  aboutInfo: "Hello, my name is Frank Yi and I am a Javascript developer from Tacoma Washington.  \
+  aboutInfo: "Hello, my name is Frank Yi and I am a Javascript developer from Seattle Washington.  \
   I love computers, coding, and all things technological.  I use HTML, CSS, and code mainly in Vanilla Javascript.  \
   I like to create projects about Seattle and based around Seattle's open data API. Check out my examples below."
 }
